@@ -73,14 +73,14 @@ default dp_table[i][0] and dp_table[0][j] as 0s
 2. compare text1[0..n] with text2[0..n] by setting if (text1[i-1] == text2[j-1]), which does the job 
 3. if text1[i-1] matches text2[j-1], record it to dp_tanlep[i][j] by incrementing it's top-left record by 1,
     dp_table[i][j] = dp_tablep[i-1][j-1] + 1;  
-4. if not the text1[i-1] == text2[j-1] match case, we take the larger top or left record from current poition
+4. if not the text1[i-1] == text2[j-1] match case, we take the larger Top or left record from current poition
     to put in current poition
     if (dp_table[i][j-1] >= dp_table[i-1][j] )
         dp_table[i][j] = dp_table[i][j-1]
     else 
         dp_table[i][j] = dp_table[i-1][j]
 5. when all the comparison and record is done, 
-    the final answer will be in the bottom left corner
+    the final answer will be in the bottom Right corner
 
 */
 
@@ -88,8 +88,10 @@ int main(int argc, char const *argv[])
 {
     // char *text1 = "apque";
     // char *text2 = "bbbbaqu";
-    char *text1 = "ac";
-    char *text2 = "badc";
+    // char *text1 = "ac";
+    // char *text2 = "badc";
+    char *text1 = "ACCGATGCAGCGCTC";
+    char *text2 = "CCGATGA";
 
     int rc = longestCommonSubsequence(text1, text2);
     printf("rc ---> %d\n", rc);
