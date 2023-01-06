@@ -68,7 +68,8 @@ char * numberToWords(int num)
     for (i=0; i<primary_size; i++)
     {
         // 7.1 Prepare a 28-int size array in every row
-        // 7.2 Loop through each secondary units and 
+        // 7.2 Loop through each secondary units and get the amount of each secondary unit
+        // 7.3 save the amount of each secondary unit in the newly created 2D array <units_of_primary_units[][]>
         units_of_primary_units[i] = (int *)calloc(28, sizeof(int));
         for (j=0; j<secondary_size; j++)
         {
@@ -78,39 +79,52 @@ char * numberToWords(int num)
         }
     }
     
+    // 8. Final Process to create English words by readin the records stored in the 2D array
+    //      8.1 use <word_size> to record current length of the English words
     char final_words[150];
     int words_size = 0;
 
+    // 9. Main Loop for processing primay units, Billion, Million to Hundred and below.
     for (i=0; i<primary_size; i++)
     {
+        // 10. Check if each primary unit requires process
         if (primary_units[i] != 0)
         {
+            // 11. Check first element in the secondary units where it should indicates how many sub-"Hundred" inside each Primary Unit
             if (units_of_primary_units[i][0] != 0)
             {
+                // 11.1 Copy the word of number by applying the first sub-"Hundred" of current primary unit as key to number[]
+                // 11.2 Once sub-"Hundred" is done, copy the "Hundred" word to <final_words[]>
                 words_size = word_copying(numbers[units_of_primary_units[i][0]], final_words, words_size);
                 words_size = word_copying(secondary_words[0], final_words, words_size);
             }
 
+            // 12. Check from 1st to 19th element of secondary units of each primary unit to see if 90-10 is required to put in
             for (j=1; j<19; j++)
             {
                 if (units_of_primary_units[i][j] != 0)
                 {
+                    // 12.1 Applying simple secondary words in the same position to <final_words[]>
                     words_size = word_copying(secondary_words[j], final_words, words_size);
                 }
             }
 
+            // 13. Check from 19th to 28th element to see if numbers below hundred is required to put it
             for (j=19; j<28; j++)
             {
                 if (units_of_primary_units[i][j] != 0)
                 {
+                    // 13.1 apply current unit of secondary units to numbers[] as key and copy the words to <final_words[]>
                     words_size = word_copying(numbers[secondary_units[j]], final_words, words_size);
                 }
             }
 
+            // 14. Copy the primary words Billion, Million, ... to Hundred and below to <final_words[]>
             words_size = word_copying(primary_words[i], final_words, words_size);
         }
     }
 
+    // 15. Final process to copy the <final_words[]> to string for returing the result.
     char *result = (char *)malloc(sizeof(char) * words_size);
     for (i=0; i<words_size; i++)
     {
@@ -155,7 +169,7 @@ Constraints:
 */
 
 
-/* Single Responsibility
+/* Without extra word copying function
 
 char * numberToWords(int num)
 {
