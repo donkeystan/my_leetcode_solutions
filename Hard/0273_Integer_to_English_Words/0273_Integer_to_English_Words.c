@@ -138,7 +138,7 @@ int main(int argc, char const *argv[])
 {
     // int num = 0;
     // int num = 2147483647;
-    int num = 999999999;
+    int num = 999;
     char *words = numberToWords(num);
     puts(words);
     return EXIT_SUCCESS;
