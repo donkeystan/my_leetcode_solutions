@@ -9,23 +9,32 @@ int removeDuplicates(int* nums, int numsSize)
     {
         return 1;
     }
+
+    if (numsSize == 2)
+    {
+        return 2;
+    }
  
+    // 1. two pointer from 0 and 1 , traverse the same time.
     int prev = 0;
     int curr = 1;
     int same = 0;
     int count = 0;
     
+
+    // 2. Loop through the array
     while (curr < numsSize)
     {
+        // 2.1. if two pointer sits in two different value, same default 0
+        //      or update same by increment
         same = (nums[prev] == nums[curr]) ? (++same) : 0 ;   
-        // printf("prev:nums[%d] : %d  <--> curr:nums[%d] : %d  same: %d \n", prev, nums[prev], curr, nums[curr], same);
         
+        // 2.2 if same is within 2
         if (same == 0 || same == 1)
         {
-            // printf("temp[%d] get nums[%d] ---> %d\n", count, prev, nums[prev]);
-            nums[count++] = nums[prev];
             
-            // printf("temp[%d] get nums[%d] ---> %d\n", count, curr, nums[curr]);
+            // 2.2.1 put prev and curr into the nums starting from count = 0
+            nums[count++] = nums[prev];           
             nums[count] = nums[curr];
         }
 
