@@ -80,7 +80,8 @@ struct TreeNode* trimBST(struct TreeNode* root, int low, int high)
 
 int main(int argc, char const *argv[])
 {
-    int nums[] = {3, 0, 4, 2, 1};
+    // int nums[] = {3, 0, 4, 2, 1};
+    int nums[] = {100, 50, 120, 45, 54, 110, 132, 40, 48, 52, 60, 105, 112, 122, 134, 30, 46, 51, 59, 101, 107, 114, 121, 125, 133, 135};
     int nums_size = sizeof(nums) / sizeof(nums[0]);
     struct TreeNode *root = NULL;
     root = create_tree(root, nums, nums_size);
@@ -94,8 +95,10 @@ int main(int argc, char const *argv[])
 
     NEWLINE
     NEWLINE
-    int low   = 1;
-    int high = 3;
+    // int low   = 1;
+    // int high = 3;
+    int low  = 55;
+    int high = 124;
     root = trimBST(root, low, high);
 
     printf("< --- Pre Order --- >\n");

@@ -18,6 +18,7 @@ struct TreeNode
     struct TreeNode *right;
 };
 
+// Simply store the inorder traversal value and chck if (nums[i] > nums[i-1] if i>0 )
 void search(struct TreeNode *root, int *isValid, int *key_box, int *idx)
 {
     if (NULL != root)
